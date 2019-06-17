@@ -43,6 +43,7 @@ body{
 .my-messages-link{
     height: 23px;
     width: auto;
+    line-height: 23px;
 }
 
 .message{
