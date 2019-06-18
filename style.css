@@ -7,7 +7,8 @@ body{
     background-color: #FFFFFF;
     display: grid;
     grid-template-columns: 4fr 1fr;
-    grid-template-rows: 10% 80% 10%;
+    grid-template-rows: 10% 70% 10%;
+    grid-row-gap: 25px;
 }
 
 .header{
@@ -18,7 +19,7 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr 2fr 5fr 3fr;
     grid-template-rows: 1fr;  
-    /* box-shadow: 0px 10px 5px 1px #C8C8C8; */
+    box-shadow: 0px 7px 5px 2px #C8C8C8;
 }
 
 .message-main-area{
@@ -27,7 +28,8 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 5% 95%;
-    grid-column-gap: 5px;
+    /* grid-column-gap: 5px; */
+    margin: 0 10px 0 10px;
 }
 
 .chat-tab{
@@ -37,6 +39,8 @@ body{
     border-bottom-width: 1px; /* Толщина линии внизу */
     border-bottom-style: solid; /* Стиль линии внизу */
     border-bottom-color: black; /* Цвет линии внизу */
+    margin: 0 3px 0 5px;
+    box-shadow: 2px -2px 2px 1px #C8C8C8;
 }
 
 .chat-tab-name{
@@ -55,6 +59,10 @@ body{
     border-bottom-style: none;
 }
 
+.chat-tab.left{
+    margin-left: 0;
+}
+
 .message-area{
     grid-row: 2/3;
     grid-column: 1/5;
@@ -64,6 +72,7 @@ body{
     column-gap: 1em;
     padding: 10px 10px 10px 10px;
     background-color: #F1F1F1;
+    border-radius: 0 0 10px 10px;
 }
 
 .my-message-row{
@@ -121,7 +130,7 @@ body{
 
 .input-message-area{
     grid-column: 1/2;
-    /* background-color: yellow; */
+    background-color: yellow;
 }
 
 .header-element{
@@ -162,10 +171,12 @@ body{
 }
 
 .number-of-messages{
-    border: 2px solid #FF0800;
+    border: 2px solid #40A7E3;
     border-radius: 15px;
-    background-color: #F1F1F1;
+    background-color: #40A7E3;
     text-align: center;
+    color: white;
+    /* visibility: hidden; */
 }
 
 .online-timer{
