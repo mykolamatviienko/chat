@@ -18,6 +18,7 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr 2fr 5fr 3fr;
     grid-template-rows: 1fr;  
+    /* box-shadow: 0px 10px 5px 1px #C8C8C8; */
 }
 
 .message-main-area{
@@ -26,20 +27,90 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 5% 95%;
+    grid-column-gap: 5px;
 }
 
 .chat-tab{
     grid-row: 1/2;
-    /* background-color: #9FFF8C; */
+    background-color: #EBEBEB;
+    border-radius: 10px 10px 0 0;
+    border-bottom-width: 1px; /* Толщина линии внизу */
+    border-bottom-style: solid; /* Стиль линии внизу */
+    border-bottom-color: black; /* Цвет линии внизу */
+}
+
+.chat-tab-name{
+    margin: 0;
+    text-align: center;
+    height: 1.5em;
+    line-height: 1.5em;
 }
 
 .chat-tab.light{
-    /* background-color: #FF7DC0; */
+    background-color: #FF7DC0;
+}
+
+.chat-tab.active{
+    background-color: #F1F1F1;
+    border-bottom-style: none;
 }
 
 .message-area{
     grid-row: 2/3;
     grid-column: 1/5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(7, 1fr);
+    column-gap: 1em;
+    padding: 10px 10px 10px 10px;
+    background-color: #F1F1F1;
+}
+
+.my-message-row{
+    /* background-color: #FFCF23; */
+    grid-column: 2/3;
+    grid-row: 6/7;
+    /* border: 1px solid #3B444B; */
+    border-radius: 15px;
+    background-color: #EFFDDE;
+    box-shadow: 5px 5px 10px 1px #62A76D;
+    display: grid;
+    grid-template-rows: 1fr 2fr; 
+}
+
+.sender-nickname{
+    grid-row: 1/2;
+    height: 1.5em;
+    margin: 3px 0px 2px 15px;
+    line-height: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.just-message{
+    grid-row: 2/3;
+    height: 100%;
+}
+
+.nickname{
+    margin: 0;
+}
+
+.companion-message-row{
+    grid-column: 1/2;
+    grid-row: 7/8;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    box-shadow: -5px 5px 10px 1px #CFCECE;
+    display: grid;
+    grid-template-rows: 1fr 2fr;  
+}
+
+.message-text{
+    text-align: center;
+    height: 2em;
+    line-height: 2em;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .user-list-area{
