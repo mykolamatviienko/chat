@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 .main-frame{
     height: 100vh;
@@ -55,7 +56,7 @@ body{
 }
 
 .chat-tab.active{
-    background-color: #F1F1F1;
+    background-color: #DCDCDC;
     border-bottom-style: none;
 }
 
@@ -71,7 +72,7 @@ body{
     grid-template-rows: repeat(7, 1fr);
     column-gap: 1em;
     padding: 10px 10px 10px 10px;
-    background-color: #F1F1F1;
+    background-color: #DCDCDC;
     border-radius: 0 0 10px 10px;
 }
 
@@ -125,7 +126,36 @@ body{
 .user-list-area{
     grid-row: 2/4;
     grid-column: 2/3;
-    /* background-color: aqua; */
+    background-color: #F1F1F1;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(20, 1fr);
+    border-radius: 15px; 
+    margin-right: 10px;
+}
+
+.common-number-of-online-users{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.text-of-online-users{
+    text-align: center;
+    margin-left: 10px;
+}
+
+.number-of-online-users{
+    text-align: center;
+    margin-right: 10px;
+}
+
+.text-participant-nickname{
+    padding-left: 15px;
+}
+
+.afk{
+    color: orange;
 }
 
 .input-message-area{
