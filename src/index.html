@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    <div class="main-frame">
+    <div class="main-frame blur-for-main-frame" id="main-frame">
         <div class="header">
             <div class="header-element">
                 <div class="logo"></div>
             </div>
             <div class="header-element cabinet">
-                <a href="#" class="link-text">Личный кабинет</a>
+                <a href="#" class="link-text" id="logout">Выход</a>
             </div>
             <div class="header-element message">
                 <div class="my-messages">
@@ -65,28 +65,10 @@
                 </div>
             </div>
         </div>
-        <div class="user-list-area">
+        <div class="user-list-area" id="user-list">
             <div class="common-number-of-online-users">
                 <p class="text-of-online-users">Участников онлайн:</p>
-                <p class="number-of-online-users">5</p>
-            </div>
-            <div class="participant-nickname-row">
-                <p class="text-participant-nickname">John Johnson</p>
-            </div>
-            <div class="participant-nickname-row">
-                <p class="text-participant-nickname">George Cloney</p>
-            </div>
-            <div class="participant-nickname-row">
-                <p class="text-participant-nickname">Jack Sparrow</p>
-            </div>
-            <div class="participant-nickname-row">
-                <p class="text-participant-nickname afk">Jon Snow</p>
-            </div>
-            <div class="participant-nickname-row">
-                <p class="text-participant-nickname">Rocky Balboa</p>
-            </div>
-            <div class="participant-nickname-row">
-                <p class="text-participant-nickname">Walter White</p>
+                <p class="number-of-online-users" id="number-of-online-users"></p>
             </div>
         </div>
         <div class="input-message-region">
@@ -104,6 +86,19 @@
                 <button class="italic-letter-button-area style-button" value="i"><i>К</i></button>
                 <button class="underline-letter-button-area style-button" value="u"><u>Ч</u></button>
                 <button class="submit-button-area style-button" type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal-window is-visible" id="modal-window">
+        <div class="modal-window-container">
+            <form action="" name="register" class="register-form">
+                <fieldset>
+                    <legend>Войдите или зарегистрируйтесь</legend>
+                    <input type="text" class="input-field" id="nickname" placeholder="Введите ваше имя">
+                    <input type="password" class="input-field" id="password" placeholder="Введите пароль">
+                </fieldset>
+                <p class="in-button-p"><input type="submit" class="style-button" value="Войти" id="sign-in-button"></p>
+                <p class="reg-button-p"><input type="submit" class="style-button" value="Регистрация" id="sign-up-button"></p>
             </form>
         </div>
     </div>
