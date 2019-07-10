@@ -33,11 +33,9 @@ body{
 
 .message-main-area{
     grid-column: 1/2;
-    /* background-color: #FF0800; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 5% 95%;
-    /* grid-column-gap: 5px; */
     margin: 0 10px 0 10px;
 }
 
@@ -45,9 +43,9 @@ body{
     grid-row: 1/2;
     background-color: #EBEBEB;
     border-radius: 10px 10px 0 0;
-    border-bottom-width: 1px; /* Толщина линии внизу */
-    border-bottom-style: solid; /* Стиль линии внизу */
-    border-bottom-color: black; /* Цвет линии внизу */
+    border-bottom-width: 1px; 
+    border-bottom-style: solid; 
+    border-bottom-color: black; 
     margin: 0 3px 0 5px;
     box-shadow: 2px -2px 2px 1px #C8C8C8;
 }
@@ -85,10 +83,8 @@ body{
 }
 
 .my-message-row{
-    /* background-color: #FFCF23; */
     grid-column: 2/3;
     grid-row: 6/7;
-    /* border: 1px solid #3B444B; */
     border-radius: 15px;
     background-color: #EFFDDE;
     box-shadow: 5px 5px 10px 1px #62A76D;
@@ -115,7 +111,7 @@ body{
 
 .companion-message-row{
     grid-column: 1/2;
-    grid-row: 7/8;
+    //grid-row: 7/8;
     border-radius: 15px;
     background-color: #FFFFFF;
     box-shadow: -5px 5px 10px 1px #CFCECE;
@@ -244,8 +240,6 @@ body{
     align-self: end;
     width: 50%;
     justify-self: center;
-    /* background-image: url(bold.png); */
-    /* background-repeat: no-repeat; */
 }
 
 .italic-letter-button-area{
@@ -288,7 +282,6 @@ body{
     border-radius: 10px;
 }
 
-/*==============================================*/
 
 .header-element{
     align-self: center;
@@ -301,8 +294,6 @@ body{
     background-repeat: no-repeat;
     height: 50px;
     width: 50px;
-    /* position: relative;
-    left: 10px;  */
 }
 
 .link-text{
@@ -333,7 +324,6 @@ body{
     background-color: #40A7E3;
     text-align: center;
     color: white;
-    /* visibility: hidden; */
 }
 
 .online-timer{
@@ -349,13 +339,12 @@ body{
 .modal-window{
     position: absolute;
     visibility: hidden;
-    //display: none;
     background-color: rgb(171, 223, 156);
     width: 360px;
     height: 200px;
     top: 50%;
     left: 50%;
-    margin: -100px 0 0 -180px; /* отступы равны половинным размера формы */
+    margin: -100px 0 0 -180px; 
     padding: 15px 10px 5px 10px;
     border-radius: 10px;
     border: black solid 1px;

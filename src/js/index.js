@@ -7,6 +7,7 @@ var logout = document.getElementById("logout");
 var registerButton = document.getElementById("sign-up-button");
 var signInButton = document.getElementById("sign-in-button");
 var userListArea = document.getElementById("user-list");
+var messageArea = document.getElementById("message-area-id");
 
 signInButton.onclick = clickTheSignInButton;
 registerButton.onclick = registration;
@@ -26,9 +27,9 @@ function clickTheSignInButton() {
         if (request.status >= 200 && request.status < 400) {
             // Обработчик успещного ответа
             var response = request.responseText;
-            //var userList = Response;
+            var userList = Response;
             var onlineNumber = 0;
-            var userExists = false;
+            var userExists = 0;
 
             JSON.parse(response).forEach(
                 function (obj) {
@@ -38,7 +39,7 @@ function clickTheSignInButton() {
                     }
                     if (obj.username == newNickname) {
                         console.log("catched!");
-                        userExists = true;
+                        userExists = 1;
                     }
                     if (obj.username) {
                         var onlineUserDiv = document.createElement('div');
@@ -59,7 +60,7 @@ function clickTheSignInButton() {
 
                 }
             )
-            if (userExists) {
+            if (userExists == 1) {
                 showMainFrame();
             } else {
                 location.reload();
@@ -70,10 +71,12 @@ function clickTheSignInButton() {
 
         } else {
             // Обработчик ответа в случае ошибки
+            showMainFrame();
         }
     };
     request.onerror = function () {
         // Обработчик ответа в случае неудачного соеденения
+        showMainFrame();
     };
     request.send();
 }
@@ -104,6 +107,58 @@ function registration() {
     }
 
     request1.send(JSON.stringify(newUser));
+}
+
+
+var clickedLogo = document.getElementById("clicked-logo");
+
+clickedLogo.onclick = refreshMessages;
+
+function refreshMessages() {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://studentschat.herokuapp.com/messages', true);
+
+    request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+            // Обработчик успещного ответа
+            var response = request.responseText;
+
+            JSON.parse(response).forEach(
+                function (obj) {
+                    console.log(obj);
+                    if (obj.user_id) {
+                        var companionMessageRow = document.createElement('div');
+                        var senderNickname = document.createElement('div');
+                        var nickname = document.createElement('p');
+                        var justMessage = document.createElement('div');
+                        var messageText = document.createElement('p');
+
+                        messageText.className = "message-text";
+                        justMessage.className = "just-message";
+                        nickname.classList = "nickname";
+                        senderNickname.classList = "sender-nickname";
+                        companionMessageRow.classList = "companion-message-row";
+
+                        messageText.innerHTML = obj.message;
+                        justMessage.appendChild(messageText);
+                        nickname.innerHTML = obj.user_id;
+                        senderNickname.appendChild(nickname);
+                        companionMessageRow.appendChild(senderNickname);
+                        companionMessageRow.appendChild(justMessage);
+                        messageArea.insertBefore(companionMessageRow, messageArea.firstChild);
+                    }
+
+                }
+            )
+
+        } else {
+            // Обработчик ответа в случае ошибки
+        }
+    };
+    request.onerror = function () {
+        // Обработчик ответа в случае неудачного соеденения
+    };
+    request.send();
 }
 
 
