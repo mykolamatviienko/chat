@@ -19,6 +19,8 @@ logout.onclick = function () {
 function clickTheSignInButton() {
 
     var newNickname = document.getElementById('nickname').value;
+    var onlineNumber = 0;
+    var userExists = 0;
 
     var request = new XMLHttpRequest();
     request.open('GET', 'https://studentschat.herokuapp.com/users', true);
@@ -28,12 +30,11 @@ function clickTheSignInButton() {
             // Обработчик успещного ответа
             var response = request.responseText;
             var userList = Response;
-            var onlineNumber = 0;
-            var userExists = 0;
 
             JSON.parse(response).forEach(
                 function (obj) {
                     console.log(obj);
+
                     if (obj.status == "active") {
                         onlineNumber += 1;
                     }
@@ -44,42 +45,38 @@ function clickTheSignInButton() {
                     if (obj.username) {
                         var onlineUserDiv = document.createElement('div');
                         var onlineUserParagraph = document.createElement('p');
-
+                
                         onlineUserDiv.className = "participant-nickname-row";
-
+                
                         if (obj.status == 'active') {
                             onlineUserParagraph.className = "text-participant-nickname";
                         } else {
                             onlineUserParagraph.className = "text-participant-nickname afk";
                         }
-
+                
                         onlineUserParagraph.innerHTML = obj.username;
                         onlineUserDiv.appendChild(onlineUserParagraph);
                         userListArea.appendChild(onlineUserDiv);
                     }
-
+                    if (userExists == 1) {
+                        showMainFrame();
+                    } else {
+                        location.reload();
+                    }
+                    console.log(onlineNumber);
+                    document.getElementById("number-of-online-users").innerHTML = onlineNumber;
                 }
             )
-            if (userExists == 1) {
-                showMainFrame();
-            } else {
-                location.reload();
-            }
-            console.log(onlineNumber);
-            document.getElementById("number-of-online-users").innerHTML = onlineNumber;
-
-
         } else {
             // Обработчик ответа в случае ошибки
-            showMainFrame();
         }
     };
     request.onerror = function () {
         // Обработчик ответа в случае неудачного соеденения
-        showMainFrame();
     };
     request.send();
 }
+    
 
 function showMainFrame() {
     var temp = document.getElementById("main-frame");
@@ -137,7 +134,7 @@ function refreshMessages() {
                         justMessage.className = "just-message";
                         nickname.classList = "nickname";
                         senderNickname.classList = "sender-nickname";
-                        companionMessageRow.classList = "companion-message-row";
+                        companionMessageRow.classList = "message-row companion-message-row";
 
                         messageText.innerHTML = obj.message;
                         justMessage.appendChild(messageText);
@@ -145,7 +142,7 @@ function refreshMessages() {
                         senderNickname.appendChild(nickname);
                         companionMessageRow.appendChild(senderNickname);
                         companionMessageRow.appendChild(justMessage);
-                        messageArea.insertBefore(companionMessageRow, messageArea.firstChild);
+                        messageArea.appendChild(companionMessageRow);
                     }
 
                 }
@@ -162,25 +159,3 @@ function refreshMessages() {
 }
 
 
-//-------------------------------------------------------
-
-
-// const getHeader = () => {
-//   const helloWebpack = _.join(['Hello', 'webpack!'], ' ');
-//   console.log(helloWebpack);
-//   const element = document.createElement('h1');
-
-//   element.innerHTML = helloWebpack;
-
-//   return element;
-// };
-
-// document.body.appendChild(getHeader());
-
-// const o = {
-//   foo: {
-//     bar: null
-//   }
-// };
-
-// console.log(o?.foo?.bar?.baz ?? 'default');
