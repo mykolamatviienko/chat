@@ -51,6 +51,7 @@
                     <div class="sender-nickname">
                         <p class="nickname">Я</p>
                     </div>
+                    <div class="message-date"></div>
                     <div class="just-message">
                         <p class="message-text">Hello, World!</p>
                     </div>
@@ -69,16 +70,17 @@
             <div class="letters-area">Букв:</div>
             <div class="casper-area">Невидимых:</div>
             <div class="signs-area">Знаков:</div>
-            <div class="total-number-area">1</div>
-            <div class="letters-number-area">2</div>
-            <div class="casper-number-area">3</div>
-            <div class="signs-number-area">4</div>
+            <div class="total-number-area" id="total-number-area-id"></div>
+            <div class="letters-number-area" id="letters-number-area-id"></div>
+            <div class="casper-number-area" id="casper-number-area-id"></div>
+            <div class="signs-number-area" id="signs-number-area-id"></div>
             <form action="" name="message-form" id="form-for-messages">
-                <textarea class="input-text-area" form="form-for-messages" name="input-text"></textarea>
-                <button class="bold-letter-button-area style-button" value="b"><bold>Ж</bold></bold></button>
-                <button class="italic-letter-button-area style-button" value="i"><i>К</i></button>
-                <button class="underline-letter-button-area style-button" value="u"><u>Ч</u></button>
-                <button class="submit-button-area style-button" type="submit">Отправить</button>
+                <textarea class="input-text-area" form="form-for-messages" name="input-text"
+                 maxlength="500" id="my-text-area" ></textarea>
+                <button type="button" class="bold-letter-button-area style-button" value="b" id="bold-letter-button-area-id"><bold>Ж</bold></bold></button>
+                <button type="button" class="italic-letter-button-area style-button" value="i" id="italic-letter-button-area-id"><i>К</i></button>
+                <button type="button" class="underline-letter-button-area style-button" value="u" id="underline-letter-button-area-id"><u>Ч</u></button>
+                <button class="submit-button-area style-button" type="button" id="submit-message-button">Отправить</button>
             </form>
         </div>
     </div>
