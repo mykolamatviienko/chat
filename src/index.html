@@ -26,11 +26,13 @@
                 <div class="number-of-messages">1</div>
             </div>
             <div class="header-element">
-                <div class="time">12:00</div>
+                <div class="time" id="clock"><span class="hour">hh</span>:<span class="min">mm</span>:<span
+                        class="sec">ss</span></div>
             </div>
             <div class="header-element online-timer">
                 <div class="text-online">Онлайн:</div>
-                <div class="time-online">3:48</div>
+                <div class="time-online" id="time-online"><span class="min">mm</span>:<span
+                    class="sec">ss</span></div>
             </div>
         </div>
         <div class="message-main-area">
@@ -56,7 +58,7 @@
                         <p class="message-text">Hello, World!</p>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <div class="user-list-area" id="user-list">
@@ -75,12 +77,19 @@
             <div class="casper-number-area" id="casper-number-area-id"></div>
             <div class="signs-number-area" id="signs-number-area-id"></div>
             <form action="" name="message-form" id="form-for-messages">
-                <textarea class="input-text-area" form="form-for-messages" name="input-text"
-                 maxlength="500" id="my-text-area" ></textarea>
-                <button type="button" class="bold-letter-button-area style-button" value="b" id="bold-letter-button-area-id"><bold>Ж</bold></bold></button>
-                <button type="button" class="italic-letter-button-area style-button" value="i" id="italic-letter-button-area-id"><i>К</i></button>
-                <button type="button" class="underline-letter-button-area style-button" value="u" id="underline-letter-button-area-id"><u>Ч</u></button>
-                <button class="submit-button-area style-button" type="button" id="submit-message-button">Отправить</button>
+                <textarea class="input-text-area" form="form-for-messages" name="input-text" maxlength="500"
+                    id="my-text-area"></textarea>
+                <button type="button" class="bold-letter-button-area style-button" value="b"
+                    id="bold-letter-button-area-id">
+                    <bold>Ж</bold>
+                    </bold>
+                </button>
+                <button type="button" class="italic-letter-button-area style-button" value="i"
+                    id="italic-letter-button-area-id"><i>К</i></button>
+                <button type="button" class="underline-letter-button-area style-button" value="u"
+                    id="underline-letter-button-area-id"><u>Ч</u></button>
+                <button class="submit-button-area style-button" type="button"
+                    id="submit-message-button">Отправить</button>
             </form>
         </div>
     </div>
@@ -93,7 +102,8 @@
                     <input type="password" class="input-field" id="password" placeholder="Введите пароль">
                 </fieldset>
                 <p class="in-button-p"><input type="button" class="style-button" value="Войти" id="sign-in-button"></p>
-                <p class="reg-button-p"><input type="submit" class="style-button" value="Регистрация" id="sign-up-button"></p>
+                <p class="reg-button-p"><input type="submit" class="style-button" value="Регистрация"
+                        id="sign-up-button"></p>
             </form>
         </div>
     </div>

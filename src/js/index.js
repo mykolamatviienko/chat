@@ -13,6 +13,8 @@ var textAreaTap = document.getElementById("my-text-area");
 var boldButton = document.getElementById("bold-letter-button-area-id");
 var italicButton = document.getElementById("italic-letter-button-area-id");
 var underlineButton = document.getElementById("underline-letter-button-area-id");
+var minutes = 0;
+var seconds = 0;
 
 submitMessageButton.onclick = submitMessage;
 signInButton.onclick = clickTheSignInButton;
@@ -27,6 +29,8 @@ logout.onclick = function () {
 
 //textAreaTap.onkeydown = countChars;
 textAreaTap.onkeyup = countChars;
+
+window.onload = clockStart();
 
 function clickTheSignInButton() {
 
@@ -249,6 +253,44 @@ function clickItalic() {
     document.getElementById("my-text-area").value += "<i></i>";
 }
 
-function clickUnderline(){
+function clickUnderline() {
     document.getElementById("my-text-area").value += "<u></u>";
+}
+
+function update() {
+    var clock = document.getElementById('clock');
+
+    var date = new Date();
+
+    var hours = date.getHours();
+    if (hours < 10) hours = '0' + hours;
+    clock.children[0].innerHTML = hours;
+
+    var minutes = date.getMinutes();
+    if (minutes < 10) minutes = '0' + minutes;
+    clock.children[1].innerHTML = minutes;
+
+    var seconds = date.getSeconds();
+    if (seconds < 10) seconds = '0' + seconds;
+    clock.children[2].innerHTML = seconds;
+}
+
+function clockStart() { // запустить часы
+    setInterval(update, 1000);
+    setInterval(updateOnline, 1000);
+    update();
+}
+
+function updateOnline() {
+    var counter = document.getElementById("time-online");
+
+    seconds += 1;
+
+    if (seconds == 60) {
+        minutes += 1;
+        seconds = 0;
+    }
+
+    counter.children[0].innerHTML = minutes;
+    counter.children[1].innerHTML = seconds;
 }
