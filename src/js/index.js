@@ -282,7 +282,7 @@ function updateOnline() {
     counter.children[0].innerHTML = minutes;
     counter.children[1].innerHTML = seconds;
 }
-=======
+
 function saveUserList(fromList, toList) {
     fromList.forEach(function (obj) {
         toList.push(obj);
