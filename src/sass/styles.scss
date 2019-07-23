@@ -34,7 +34,7 @@ body{
 .message-main-area{
     grid-column: 1/2;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 5% 95%;
     margin: 0 10px 0 10px;
 }
@@ -197,8 +197,13 @@ body{
 }
 
 .text-participant-nickname{
-    padding-left: 15px;
-    margin: 5px 0 5px 0;
+    //padding-left: 15px;
+    padding: 5px 0 11px 15px;
+    margin: 0;
+}
+.participant-nickname-row:hover{
+    cursor: default;
+    background-color: #DCDCDC;
 }
 
 .afk{

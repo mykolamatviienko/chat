@@ -3,7 +3,8 @@ import _ from 'lodash';
 
 import './../sass/styles.scss';
 
-
+var staticMessages = [{ "user_id": "1122962595", "message": "Hello?", "chatroom_id": "MAIN", "datetime": "2019-06-28T00:16:12.343Z" }
+    , { "user_id": "1122962595", "message": "Bye", "chatroom_id": "MAIN", "datetime": "2019-06-28T00:16:12.343Z" }];
 
 var logout = document.getElementById("logout");
 var registerButton = document.getElementById("sign-up-button");
@@ -15,14 +16,27 @@ var textAreaTap = document.getElementById("my-text-area");
 var boldButton = document.getElementById("bold-letter-button-area-id");
 var italicButton = document.getElementById("italic-letter-button-area-id");
 var underlineButton = document.getElementById("underline-letter-button-area-id");
+
+var mainChatTab = document.getElementById("main-chat-tab");
+var privateChatTab = document.getElementById("private-chat-tab");
+
 var minutes = 0;
 var seconds = 0;
 var clickedLogo = document.getElementById("clicked-logo");
 var currentDate = null; // текущая дата для сообщений
 var onlineNumber = 0; // число пользователей онлайн
 var myUserId; // хранилище моего id
+var myUserName; //хранилще моего имени
 var myUsersList = []; // хранилище моих пользователей
 var myMessagesList = []; // хранилище сообщений
+
+mainChatTab.addEventListener("click", mainChatToActiveClass);
+mainChatTab.addEventListener("click", refreshMessagesList);
+
+privateChatTab.addEventListener("click", privateChatToActiveClass);
+privateChatTab.addEventListener("click", deleteMainChat);
+
+var tempCompanionName;
 
 submitMessageButton.onclick = submitMessage;
 signInButton.onclick = clickTheSignInButton;
@@ -30,10 +44,30 @@ registerButton.onclick = registration;
 boldButton.onclick = clickBold;
 italicButton.onclick = clickItalic;
 underlineButton.onclick = clickUnderline;
-clickedLogo.onclick = refreshMessagesList;
+clickedLogo.onclick = deleteMainChat;
 
 logout.onclick = function () {
     location.reload();
+}
+
+userListArea.onclick = function (e) {
+    getClickedCompanionName(e);
+    console.log(tempCompanionName);
+
+    if (myUserName != tempCompanionName) {
+        privateChatTab.children[0].innerHTML = e.target.innerHTML;
+
+        privateChatToActiveClass();
+        deleteMainChat();
+        drawMessages(staticMessages);
+    }
+
+
+}
+
+function getClickedCompanionName(e) {
+    tempCompanionName = e.target.innerHTML;
+    return tempCompanionName;
 }
 
 //textAreaTap.onkeydown = countChars;
@@ -80,10 +114,19 @@ function clickTheSignInButton() {
     requestToUsersList(myUsersList).then((requested) => {
         if (requested) loginConfirm(newNickname)
     })
+
+    setInterval(function () {
+        if (mainChatTab.classList.contains('active')) {
+            refreshMessagesList();
+        }
+    }, 5000);
+    setInterval(refreshUsersList, 3000);
+
 }
 
-function writeMyName(userid) {
+function writeMyName(userid, userName) {
     myUserId = userid;
+    myUserName = userName;
     console.log("id below");
     console.log(myUserId);
 
@@ -180,26 +223,43 @@ function refreshMessagesList() {
 
 function submitMessage() {
 
-    var request2 = new XMLHttpRequest();
-    request2.open('POST', 'https://studentschat.herokuapp.com/messages', true);
+    if (document.getElementById("private-chat-tab").classList.contains("active")) {
+        var newStaticMessage = [{
+            "user_id": myUserId,
+            "message": document.getElementById("my-text-area").value, 
+            "chatroom_id": "MAIN", 
+            "datetime": new Date()
+        }];
+       drawMessages(newStaticMessage);
 
-    request2.onload = function () {
-        // Обработчик ответа в случае удачного соеденения
-    };
+    } else {
 
-    request2.onerror = function () {
-        // Обработчик ответа в случае неудачного соеденения
-    };
-    request2.setRequestHeader('Content-Type', 'application/json');
+        var request2 = new XMLHttpRequest();
+        request2.open('POST', 'https://studentschat.herokuapp.com/messages', true);
 
-    var newMessage = {
-        datetime: new Date(),
-        message: document.getElementById("my-text-area").value,
-        user_id: myUserId
+        request2.onload = function () {
+            // Обработчик ответа в случае удачного соеденения
+        };
+
+        request2.onerror = function () {
+            // Обработчик ответа в случае неудачного соеденения
+        };
+        request2.setRequestHeader('Content-Type', 'application/json');
+
+        if (document.getElementById("my-text-area").value != '') {
+            var newMessage = {
+                datetime: new Date(),
+                message: document.getElementById("my-text-area").value,
+                user_id: myUserId
+            }
+
+            request2.send(JSON.stringify(newMessage));
+            document.getElementById("my-text-area").value = "";
+        } else {
+            console.log("Пустое сообщение!");
+
+        }
     }
-
-    request2.send(JSON.stringify(newMessage));
-    document.getElementById("my-text-area").value = "";
 }
 
 function countChars() {
@@ -295,7 +355,7 @@ function saveUserList(fromList, toList) {
 function loginConfirm(inputName) {
     myUsersList.forEach(function (obj) {
         if (obj.username == inputName) {
-            writeMyName(obj.user_id);
+            writeMyName(obj.user_id, obj.username);
             showMainFrame();
             return;
         }
@@ -323,6 +383,7 @@ function drawTheUsers(list) {
 
             onlineUserParagraph.innerHTML = obj.username;
             onlineUserDiv.appendChild(onlineUserParagraph);
+            onlineUserDiv.id = obj.username;
             userListArea.appendChild(onlineUserDiv);
             document.getElementById("number-of-online-users").innerHTML = onlineNumber;
         }
@@ -330,12 +391,24 @@ function drawTheUsers(list) {
 
 }
 
-function drawMessages(list) {
+
+
+function drawMessages(list = myMessagesList) {
 
     list.forEach(function (obj) {
+        var userNameFromId;
+
+        myUsersList.forEach(function (objUser) {
+            if (obj.user_id == objUser.user_id) {
+                userNameFromId = objUser.username;
+                return userNameFromId;
+            }
+        });
+
         if (obj.user_id) {
-            if (currentDate != obj.datetime.substr(0, 10)) {
-                currentDate = obj.datetime.substr(0, 10);
+
+            if ((currentDate != obj.datetime.toString().substr(0, 10))) {
+                currentDate = obj.datetime.toString().substr(0, 10);
                 var currentDateDiv = document.createElement('div');
                 currentDateDiv.className = "division-by-days";
                 currentDateDiv.innerHTML = currentDate;
@@ -356,11 +429,16 @@ function drawMessages(list) {
                 senderNickname.classList = "sender-nickname";
                 myMessageRow.classList = "message-row my-message-row";
 
-                var myHours = obj.datetime.substr(11, 5);
-
+                //var tempDate = obj.datetime.toISOString();
+                var tempDate = new Date();
+                var myHours = tempDate.getHours() + ":" + tempDate.getMinutes();
+                
+                //var myHours = tempDate.toString().substr(11, 5);
+                //console.log(tempDate);
+                
                 messageText.innerHTML = obj.message;
                 justMessage.appendChild(messageText);
-                nickname.innerHTML = obj.user_id;
+                nickname.innerHTML = userNameFromId;
                 messageDate.innerHTML = myHours;
                 senderNickname.appendChild(nickname);
                 myMessageRow.appendChild(senderNickname);
@@ -388,7 +466,7 @@ function drawMessages(list) {
 
                 messageText.innerHTML = obj.message;
                 justMessage.appendChild(messageText);
-                nickname.innerHTML = obj.user_id;
+                nickname.innerHTML = userNameFromId;
                 messageDate.innerHTML = myHours;
                 senderNickname.appendChild(nickname);
                 companionMessageRow.appendChild(senderNickname);
@@ -405,6 +483,8 @@ function refreshUsersList() {
     var listFromRequest = [];
     var newUsersArray = [];
 
+
+
     function createNewUsersArray(requestList, lastUsersList) {
         for (var i = 0; i < requestList.length; i++) {
             if (JSON.stringify(requestList[i]) != JSON.stringify(lastUsersList[i])) {
@@ -412,6 +492,7 @@ function refreshUsersList() {
             }
         }
     }
+
 
     requestToUsersList(listFromRequest).then((requested) => {
         if (requested) {
@@ -434,6 +515,29 @@ function refreshUsersList() {
 }
 
 
-setInterval(refreshMessagesList,3000);
-setInterval(refreshUsersList, 10000);
+// setInterval(refreshMessagesList, 5000);
+// setInterval(refreshUsersList, 3000);
 
+function deleteMainChat() {
+    var parent = document.getElementById("message-area-id");
+    console.log(parent);
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+    myMessagesList.splice(0, myMessagesList.length);
+}
+
+function mainChatToActiveClass() {
+    if (!(mainChatTab.classList.contains('active'))) {
+        mainChatTab.classList += ' active';
+        privateChatTab.classList.remove('active');
+    }
+}
+
+function privateChatToActiveClass() {
+    if (!(privateChatTab.classList.contains('active'))) {
+        privateChatTab.classList += ' active';
+        mainChatTab.classList.remove('active');
+        deleteMainChat();
+    }
+}
