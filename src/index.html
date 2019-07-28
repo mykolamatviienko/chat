@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- <link href="sass/styles.scss"> -->
+</head>
+
+<body>
+    <div class="main-frame blur-for-main-frame" id="main-frame">
+        <div class="header">
+            <div class="header-element">
+                <div class="logo" id="clicked-logo"></div>
+            </div>
+            <div class="header-element cabinet">
+                <a href="#" class="link-text" id="logout">Выход</a>
+            </div>
+            <div class="header-element message">
+                <div class="my-messages">
+                    <a href="#" class="my-messages-link link-text">Cообщения</a>
+                </div>
+                <div class="number-of-messages">1</div>
+            </div>
+            <div class="header-element">
+                <div class="time" id="clock"><span class="hour">hh</span>:<span class="min">mm</span>:<span
+                        class="sec">ss</span></div>
+            </div>
+            <div class="header-element online-timer">
+                <div class="text-online">Онлайн:</div>
+                <div class="time-online" id="time-online"><span class="min">mm</span>:<span
+                    class="sec">ss</span></div>
+            </div>
+        </div>
+        <div class="message-main-area">
+            <div class="chat-tab left active" id="main-chat-tab">
+                <p class="chat-tab-name">Общий</p>
+            </div>
+            <div class="chat-tab" id="private-chat-tab">
+                <p class="chat-tab-name">ЛС</p>
+            </div>
+            <div class="message-area" id="message-area-id">
+                <div class="message-row my-message-row">
+                    <div class="sender-nickname">
+                        <p class="nickname">Я</p>
+                    </div>
+                    <div class="message-date"></div>
+                    <div class="just-message">
+                        <p class="message-text">Hello, World!</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="user-list-area" id="user-list">
+            <div class="common-number-of-online-users">
+                <p class="text-of-online-users">Участников онлайн:</p>
+                <p class="number-of-online-users" id="number-of-online-users"></p>
+            </div>
+        </div>
+        <div class="input-message-region">
+            <div class="total-area">Всего:</div>
+            <div class="letters-area">Букв:</div>
+            <div class="casper-area">Невидимых:</div>
+            <div class="signs-area">Знаков:</div>
+            <div class="total-number-area" id="total-number-area-id"></div>
+            <div class="letters-number-area" id="letters-number-area-id"></div>
+            <div class="casper-number-area" id="casper-number-area-id"></div>
+            <div class="signs-number-area" id="signs-number-area-id"></div>
+            <form action="" name="message-form" id="form-for-messages">
+                <textarea class="input-text-area" form="form-for-messages" name="input-text" maxlength="500"
+                    id="my-text-area"></textarea>
+                <button type="button" class="bold-letter-button-area style-button" value="b"
+                    id="bold-letter-button-area-id">
+                    <bold>Ж</bold>
+                    </bold>
+                </button>
+                <button type="button" class="italic-letter-button-area style-button" value="i"
+                    id="italic-letter-button-area-id"><i>К</i></button>
+                <button type="button" class="underline-letter-button-area style-button" value="u"
+                    id="underline-letter-button-area-id"><u>Ч</u></button>
+                <button class="submit-button-area style-button" type="button"
+                    id="submit-message-button">Отправить</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal-window is-visible" id="modal-window">
+        <div class="modal-window-container">
+            <form action="" name="register" class="register-form">
+                <fieldset>
+                    <legend>Войдите или зарегистрируйтесь</legend>
+                    <input type="text" class="input-field" id="nickname" placeholder="Введите ваше имя">
+                    <input type="password" class="input-field" id="password" placeholder="Введите пароль">
+                </fieldset>
+                <p class="in-button-p"><input type="button" class="style-button" value="Войти" id="sign-in-button"></p>
+                <p class="reg-button-p"><input type="submit" class="style-button" value="Регистрация"
+                        id="sign-up-button"></p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
